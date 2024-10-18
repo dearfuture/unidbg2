@@ -79,6 +79,8 @@ public class Weibo extends AbstractJni{
 
     //补环境
     //java.lang.UnsupportedOperationException: android/content/ContextWrapper->getPackageManager()Landroid/content/pm/PackageManager;
+    //at com.github.unidbg.linux.android.dvm.AbstractJni.callObjectMethod(AbstractJni.java:933)
+
     @Override
     public DvmObject<?> callObjectMethod(BaseVM vm, DvmObject<?> dvmObject, String signature, VarArg varArg) {
         switch (signature){
@@ -88,5 +90,6 @@ public class Weibo extends AbstractJni{
         }
         return super.callObjectMethod(vm, dvmObject, signature, varArg);
     }
+
 
 }
