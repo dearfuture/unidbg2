@@ -78,9 +78,38 @@ public class NetWork  extends AbstractJni{
         switch (signature){
             case "com/izuiyou/common/base/BaseApplication->getAppContext()Landroid/content/Context;":{
                 // return vm.resolveClass("android/content/Context").newObject(null);
-                //DvmObject<?> context = vm.resolveClass("android/app/Application", vm.resolveClass("android/content/ContextWrapper", vm.resolveClass("android/content/Context"))).newObject(null);
+                // DvmObject<?> context = vm.resolveClass("android/app/Application", vm.resolveClass("android/content/ContextWrapper", vm.resolveClass("android/content/Context"))).newObject(null);
 
-                //关键点
+//                public class AppController extends BaseApplication
+//                public void onCreate() {
+//                    //...
+//                    super.onCreate();             -->init
+//                    //...
+//                }
+
+////              public abstract class BaseApplication extends MultiDexApplication
+//                public static Application ___APPLICATION;
+//                public void onCreate() {
+//                    super.onCreate();
+//                    ___APPLICATION = this;        -->init
+//                }
+//                public static Context getAppContext() {
+//                    //...
+//                    return ___APPLICATION.getApplicationContext();    -->resolve
+//                }
+
+//                public abstract class oc0
+//                public void c0() {
+//                    if (PatchProxy.proxy(new Object[0], this, changeQuickRedirect, false, 18295, new Class[0], Void.TYPE).isSupported) {
+//                        return;
+//                    }
+//                    if (BaseApplication.__getApplication() instanceof AppController) {
+//                        ((AppController) BaseApplication.__getApplication()).a();
+//                    }
+//                    r70.a(false);
+//                }
+
+                //关键点 注意上述初始化和相关检测, getApplicationContext()和__getApplication()都是获取Application对象
                 DvmObject<?> context = vm.resolveClass("cn/xiaochuankeji/tieba/AppController").newObject(null);
                 return context;
             }
